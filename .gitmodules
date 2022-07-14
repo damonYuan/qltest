@@ -1,0 +1,3 @@
+[submodule "libs/quantlib"]
+	path = libs/quantlib
+	url = git@github.com:lballabio/QuantLib.git
