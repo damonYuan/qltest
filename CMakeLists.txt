@@ -19,8 +19,10 @@ set(MAIN_LIBRARIES
 
 # build
 project(${MAIN_APP_PROJECT_NAME})
-include_directories(/usr/local/include)
-link_directories(/usr/local/lib)
+include_directories(/usr/local/include) # boost
+link_directories(/usr/local/lib) # boost
+include_directories(/Users/damon/cbin/include) # quantlib
+link_directories(/Users/damon/cbin/lib) # quantlib
 add_executable(${MAIN_APP_PROJECT_NAME} ${MAIN_APP_SOURCE})
 foreach(LIBRARY ${MAIN_LIBRARIES})
     add_subdirectory("${MAIN_LIBRARIES_DIR}/${LIBRARY}")

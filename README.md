@@ -3,9 +3,23 @@ README
 
 # Prerequisite
 
+Prepare the bin folders
+
+```
+mkdir -p ~/cbin/bin ~/cbin/include ~/cbin/lib
+```
+
+Install through Homebrew
 ```
 brew install boost
 brew install quantlib
+```
+or build quantlib by yourself
+```
+cd libs/quantlib
+cmake -S . -B build
+cmake --build build
+cmake --install build --prefix ~/cbin
 ```
 
 # How to build, test and install
@@ -13,8 +27,8 @@ brew install quantlib
 ```
 git submodule update --init --recursive
 cmake -S . -B build
+cmake --build build --target test
 cmake --build build
-ctest --test-dir build
 cmake --install build --prefix ~/cbin
 qltest
 ```
