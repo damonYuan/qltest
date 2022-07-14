@@ -16,6 +16,7 @@ brew install quantlib
 ```
 or build quantlib by yourself
 ```
+git submodule update --init --recursive
 cd libs/quantlib
 cmake -S . -B build
 cmake --build build
@@ -25,7 +26,6 @@ cmake --install build --prefix ~/cbin
 # How to build, test and install
 
 ```
-git submodule update --init --recursive
 cmake -S . -B build
 cmake --build build --target test
 cmake --build build
