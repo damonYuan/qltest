@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
     std::cout << std::endl;
 
     QuantLib::Calendar myCal=QuantLib::UnitedKingdom();
-    QuantLib::Date newYearsEve(31,QuantLib::Dec,2008);
+    QuantLib::Date newYearsEve(31,QuantLib::Dec,2021);
 
     std::cout << "Name: " << myCal.name()<< std::endl;
     std::cout << "New Year is Holiday: " << myCal.isHoliday(newYearsEve)<< std::endl;
@@ -15,8 +15,8 @@ int main(int argc, char* argv[])
 
     std::cout << "--------------- Date Counter --------------------" << std::endl;
 
-    QuantLib::Date date1(28,QuantLib::Dec,2008);
-    QuantLib::Date date2(04,QuantLib::Jan,2009);
+    QuantLib::Date date1(28,QuantLib::Dec,2021);
+    QuantLib::Date date2(04,QuantLib::Jan,2022);
 
     std::cout << "First Date: " << date1 << std::endl;
     std::cout << "Second Date: " << date2 << std::endl;
