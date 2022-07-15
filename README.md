@@ -1,7 +1,9 @@
 README
 ====
 
-Although QuantLib python version is a good candidate for testing purpose, there are still some differences compared with the c++ version, not to say that some of the latest functions could not be found. This project aims at setting up a c++ cmake-based project for testing the features in QuantLib, and it could also be a project template to be extended on for all kinds of reasons.
+Although QuantLib python version is a good candidate for testing purpose, there are still some differences compared with the c++ version, not to say that some of the latest functions could not be found in the python version. [Quantlib Installation Manual](https://www.quantlib.org/install.shtml) has provided some instruction about how to build and install the library in your machine through outdated `autoconf` tools while there are not much information about how to build through modern `cmake` and how to integrate it as dynamic library into your c++ project.
+
+This project aims at setting up a c++ cmake-based project for testing the features in QuantLib, and it could also be a template to be extended upon.
 
 # Prerequisite
 
@@ -12,12 +14,21 @@ You could install the binary into system default bin folder, however here a cust
 ```
 mkdir -p ~/cbin/bin ~/cbin/include ~/cbin/lib
 ```
-and add `~/cbin` into the PATH.
+and expose `~/cbin/bin` in the PATH, eg., add it to the `~/.bash_profile`.
 
-## Install Dependencies through Homebrew
-Install through Homebrew
+## Install the `boost`
+
+Here in Mac I will install it through `Homebrew`,
+
 ```
 brew install boost
+```
+
+## Install the `QuantLib`
+
+### Install Dependencies through Homebrew
+Install through Homebrew
+```
 brew install quantlib
 ```
 and use the following CMakeList.txt
@@ -70,12 +81,9 @@ include(GoogleTest)
 gtest_discover_tests(qltest_test)
 ```
 
-## Install through Build, Install and Import
-`boost` is still required.
-```
-brew install boost
-```
-and then you will build the QuantLib by yourself and install it into the customized path
+### Two-Steps Installation
+
+You will build the QuantLib by yourself and install it into the customized path
 ```
 git submodule update --init --recursive
 cd libs/quantlib
@@ -139,19 +147,7 @@ target_link_libraries(qltest_test gtest_main)
 include(GoogleTest)
 gtest_discover_tests(qltest_test)
 ```
-in your root CMakeLists.txt
-
-## Install through CMAKE lib
-
-`boost` is still required.
-```
-brew install boost
-```
-and then download the source code
-```
-git submodule update --init --recursive
-```
-and then build quantlib through CMake as the current version of CMakeLists.txt in this project. Then you could install it through
+in your root CMakeLists.txt and build the project through
 
 ```
 cmake -S . -B build
@@ -161,7 +157,72 @@ cmake --install build --prefix ~/cbin
 qltest
 ```
 
-Here you go!
+### One-Step Installation
+
+Download the source code
+```
+git submodule update --init --recursive
+```
+and then build `QuantLib` through CMake using the following CMakeLists.txt
+```
+cmake_minimum_required(VERSION 3.10)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(MAIN_APP_PROJECT_NAME
+        qltest
+        )
+set(MAIN_APP_SOURCE_DIR
+        src
+        )
+set(MAIN_APP_SOURCE
+        ${MAIN_APP_SOURCE_DIR}/app.cpp
+        )
+set(MAIN_LIBRARIES_DIR
+        ${CMAKE_SOURCE_DIR}/libs
+        )
+list(APPEND CMAKE_INSTALL_RPATH /Users/damon/cbin/lib) # https://stackoverflow.com/questions/43551483/how-to-set-rpath-in-cmake
+# build
+project(${MAIN_APP_PROJECT_NAME})
+add_executable(${MAIN_APP_PROJECT_NAME} ${MAIN_APP_SOURCE})
+add_subdirectory("${MAIN_LIBRARIES_DIR}/quantlib")
+target_link_libraries(${MAIN_APP_PROJECT_NAME}
+        ql_library
+        )
+target_include_directories(${MAIN_APP_PROJECT_NAME} PUBLIC
+        /usr/local/include
+        /Users/damon/cbin/include
+        )
+
+# install
+install(TARGETS ${MAIN_APP_PROJECT_NAME} DESTINATION bin)
+
+# gtest
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+add_executable(qltest_test test/app_test.cpp)
+target_link_libraries(qltest_test gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(qltest_test)
+```
+and then build the project
+```
+cmake -S . -B build
+cmake --build build --clean-first
+cmake --build build --target test
+cmake --install build --prefix ~/cbin
+qltest
+```
+
+HERE YOU GO!
 
 # How to uninstall
 

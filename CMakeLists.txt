@@ -14,7 +14,7 @@ set(MAIN_APP_SOURCE
 set(MAIN_LIBRARIES_DIR
         ${CMAKE_SOURCE_DIR}/libs
         )
-list(APPEND CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib) # https://stackoverflow.com/questions/43551483/how-to-set-rpath-in-cmake
+list(APPEND CMAKE_INSTALL_RPATH /Users/damon/cbin/lib) # https://stackoverflow.com/questions/43551483/how-to-set-rpath-in-cmake
 # build
 project(${MAIN_APP_PROJECT_NAME})
 add_executable(${MAIN_APP_PROJECT_NAME} ${MAIN_APP_SOURCE})
@@ -24,7 +24,7 @@ target_link_libraries(${MAIN_APP_PROJECT_NAME}
         )
 target_include_directories(${MAIN_APP_PROJECT_NAME} PUBLIC
         /usr/local/include
-        ${CMAKE_INSTALL_PREFIX}/include
+        /Users/damon/cbin/include
         )
 
 # install
