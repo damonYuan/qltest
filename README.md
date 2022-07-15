@@ -1,16 +1,20 @@
 README
 ====
 
+Although QuantLib python version is a good candidate for testing purpose, there are still some differences compared with the c++ version, not to say that some of the latest functions could not be found. This project aims at setting up a c++ cmake-based project for testing the features in QuantLib, and it could also be a project template to be extended on for all kinds of reasons.
+
 # Prerequisite
 
-Prepare the bin folders
+## Prepare the bin folders
+
+You could install the binary into system default bin folder, however here a customized directory is preferred to make the development version more manageable.
 
 ```
 mkdir -p ~/cbin/bin ~/cbin/include ~/cbin/lib
 ```
 and add `~/cbin` into the PATH.
 
-## Homebrew
+## Install Dependencies through Homebrew
 Install through Homebrew
 ```
 brew install boost
@@ -66,8 +70,12 @@ include(GoogleTest)
 gtest_discover_tests(qltest_test)
 ```
 
-## Build and Import
-or build quantlib by yourself
+## Install through Build, Install and Import
+`boost` is still required.
+```
+brew install boost
+```
+and then you will build the QuantLib by yourself and install it into the customized path
 ```
 git submodule update --init --recursive
 cd libs/quantlib
@@ -75,7 +83,7 @@ cmake -S . -B build
 cmake --build build --clean-first
 cmake --install build --prefix ~/cbin
 ```
-and use CMakeLists.txt as
+and then use a CMakeLists.txt with the following content
 ```
 cmake_minimum_required(VERSION 3.10)
 
@@ -133,10 +141,17 @@ gtest_discover_tests(qltest_test)
 ```
 in your root CMakeLists.txt
 
-## Build as Lib
-or build quantlib through CMake as the current version of CMakeLists.txt in the project.
+## Install through CMAKE lib
 
-# How to build, test and install
+`boost` is still required.
+```
+brew install boost
+```
+and then download the source code
+```
+git submodule update --init --recursive
+```
+and then build quantlib through CMake as the current version of CMakeLists.txt in this project. Then you could install it through
 
 ```
 cmake -S . -B build
@@ -146,6 +161,8 @@ cmake --install build --prefix ~/cbin
 qltest
 ```
 
+Here you go!
+
 # How to uninstall
 
 ```
@@ -154,7 +171,7 @@ cat build/install_manifest.txt | xargs rm
 
 # Others
 
-Use `otool`
+Use `otool` to check the linked libraries
 
 ```
 otool -L ./build/qltest

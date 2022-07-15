@@ -14,7 +14,7 @@ set(MAIN_APP_SOURCE
 set(MAIN_LIBRARIES_DIR
         ${CMAKE_SOURCE_DIR}/libs
         )
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON) # https://stackoverflow.com/questions/47697761/cmake-run-time-error-dyld-library-not-loaded-for-dynamically-linked-resource
+list(APPEND CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib) # https://stackoverflow.com/questions/43551483/how-to-set-rpath-in-cmake
 # build
 project(${MAIN_APP_PROJECT_NAME})
 add_executable(${MAIN_APP_PROJECT_NAME} ${MAIN_APP_SOURCE})
