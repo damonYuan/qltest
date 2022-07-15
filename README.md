@@ -26,6 +26,8 @@ brew install boost
 
 ## Install the `QuantLib`
 
+There are more at least three ways to integrate the `QuantLib`.
+
 ### Install Dependencies through Homebrew
 Install through Homebrew
 ```
