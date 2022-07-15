@@ -159,6 +159,8 @@ qltest
 
 ### One-Step Installation
 
+This is the method that the project is using now.
+
 Download the source code
 ```
 git submodule update --init --recursive
