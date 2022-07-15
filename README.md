@@ -218,7 +218,7 @@ gtest_discover_tests(qltest_test)
 and then build the project
 ```
 cmake -S . -B build
-cmake --build build --clean-first
+cmake --build build
 cmake --build build --target test
 cmake --install build --prefix ~/cbin
 qltest
