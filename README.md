@@ -1,7 +1,7 @@
 README
 ====
 
-Although QuantLib python version is a good candidate for testing purpose, there are still some differences compared with the c++ version, not to say that some of the latest functions could not be found in the python version. [Quantlib Installation Manual](https://www.quantlib.org/install.shtml) has provided some instruction about how to build and install the library in your machine through outdated `autoconf` tools while there are not much information about how to build through modern `cmake` and how to integrate it as dynamic library into your c++ project.
+Although QuantLib python version is a good candidate for testing purpose, there are still some differences compared with the c++ version (actually python version is just a wrap using [SWIG](https://www.swig.org/) around the c++ version), not to say that some of the latest functions could not be found in the python version. [Quantlib Installation Manual](https://www.quantlib.org/install.shtml) has provided some instruction about how to build and install the library in your machine through outdated `autoconf` tools while there are not much information about how to build through modern `cmake` and how to integrate it as dynamic library into your c++ project.
 
 This project aims at setting up a c++ cmake-based project for testing the features in QuantLib, and it could also be a template to be extended upon.
 
