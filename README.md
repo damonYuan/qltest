@@ -61,6 +61,7 @@ target_link_libraries(${MAIN_APP_PROJECT_NAME}
         )
 target_include_directories(${MAIN_APP_PROJECT_NAME} PUBLIC
         /usr/local/include
+        /opt/homebrew/include/
         )
 
 # install
@@ -127,6 +128,7 @@ target_link_libraries(${MAIN_APP_PROJECT_NAME}
         )
 target_include_directories(${MAIN_APP_PROJECT_NAME} PUBLIC
         /usr/local/include
+        /opt/homebrew/include/
         ${QUANTLIB_INCLUDE}
         )
 
@@ -195,6 +197,7 @@ target_link_libraries(${MAIN_APP_PROJECT_NAME}
         )
 target_include_directories(${MAIN_APP_PROJECT_NAME} PUBLIC
         /usr/local/include
+        /opt/homebrew/include/
         /Users/damon/cbin/include
         )
 

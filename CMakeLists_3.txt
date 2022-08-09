@@ -14,24 +14,17 @@ set(MAIN_APP_SOURCE
 set(MAIN_LIBRARIES_DIR
         ${CMAKE_SOURCE_DIR}/libs
         )
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON) # https://stackoverflow.com/questions/47697761/cmake-run-time-error-dyld-library-not-loaded-for-dynamically-linked-resource
+list(APPEND CMAKE_INSTALL_RPATH /Users/damon/cbin/lib) # https://stackoverflow.com/questions/43551483/how-to-set-rpath-in-cmake
 # build
 project(${MAIN_APP_PROJECT_NAME})
-find_library(QUANTLIB_LIBRARY quantlib
-        HINTS "~/cbin/lib")
-find_path(
-        QUANTLIB_INCLUDE
-        NAMES "ql/quantlib.hpp"
-        PATHS "~/cbin/include"
-)
 add_executable(${MAIN_APP_PROJECT_NAME} ${MAIN_APP_SOURCE})
+add_subdirectory("${MAIN_LIBRARIES_DIR}/quantlib")
 target_link_libraries(${MAIN_APP_PROJECT_NAME}
-        ${QUANTLIB_LIBRARY}
+        ql_library
         )
 target_include_directories(${MAIN_APP_PROJECT_NAME} PUBLIC
         /usr/local/include
-        /opt/homebrew/include/
-        ${QUANTLIB_INCLUDE}
+        /Users/damon/cbin/include
         )
 
 # install
